@@ -7,12 +7,11 @@ To use add:
    
 	import sbt._
 
-	object Plugins extends Build {
-	  lazy val plugins = Project("plugins", file("."))
-	    .dependsOn(
-	      uri("git://github.com/bseibel/sbt-simple-junit-xml-reporter-plugin.git")
-	    )
-	}
+        object Plugins extends Build {
+          val reporterPlugin = ProjectRef(new URI("git://github.com/mmarich/sbt-simple-junit-xml-reporter-plugin.git"),
+            "sbt-simple-junit-xml-reporter-plugin")
+          lazy val plugins = Project("plugins", file(".")).dependsOn(reporterPlugin)
+        }
 
 
-to project/project/plugins.scala
+to project/project/Plugins.scala
